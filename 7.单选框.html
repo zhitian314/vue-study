@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单选框</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <label>
+            <input type="radio" v-model="grade" value="大一">大一
+        </label>
+        <label>
+            <input type="radio" v-model="grade" value="大二">大二
+        </label>
+        <label>
+            <input type="radio" v-model="grade" value="大三">大三
+        </label>
+        <label>
+            <input type="radio" v-model="grade" value="大四">大四
+        </label>
+        <p>你当前选择的是{{grade}}</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    grade: ''
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

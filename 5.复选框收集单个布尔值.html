@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单选框</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+<style>
+    .red {
+        color: red;
+    }
+
+    .green {
+        color: green;
+    }
+</style>
+
+<body>
+    <label>
+        <input type="checkbox" v-model="agree">
+        我同意该规定
+        <div>当前agree的值：
+            <p :class="{green:agree===true,red:agree===false}">{{agree}}</p>
+        </div>
+    </label>
+    <script>
+        new Vue({
+            el: 'label',
+            data() {
+                return {
+                    agree: false
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

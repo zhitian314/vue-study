@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复选框</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div id="app">
+        <label>
+            <input type="checkbox" v-model="clubs" value="篮球社">
+            篮球社
+        </label>
+
+        <label>
+            <input type="checkbox" v-model="clubs" value="音乐社">
+            音乐社
+        </label>
+
+        <label>
+            <input type="checkbox" v-model="clubs" value="舞蹈社">
+            舞蹈社
+        </label>
+
+        <div>你选择了
+            <p style="font-size: 20px;">{{clubs}}</p>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    clubs: []
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

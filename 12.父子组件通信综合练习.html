@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件通信综合练习</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="goodsName" placeholder="请输入商品名称">
+        <button @click="addGoods">添加</button>
+        <input type="text" v-model="search">
+        <div v-if="goodsCount > 0">
+            <goods-item :goods="good" @remove-goods="deleteGoods" v-for="good in filterGoods"
+                :key="good.id"></goods-item>
+        </div>
+        <div v-else>暂无商品</div>
+
+        <p>商品总数：{{goodsCount}}</p>
+        <p v-if="filterGoodsCount > 0">搜索结果：{{filterGoodsCount}}</p>
+        <p v-else>暂无匹配商品</p>
+
+    </div>
+
+    <script>
+        Vue.component('goods-item', {
+            props: ['goods'],
+            template: `
+            <div>
+        <span>{{goods.name}}</span>
+        <button @click="removeGoods">下架</button>
+    </div>
+            `
+            ,
+            methods: {
+                removeGoods() {
+                    this.$emit('remove-goods', this.goods.id)
+                }
+            }
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                goodsList: [],
+                goodsName: '',
+                nextId: 1,
+                search: ''
+            },
+            methods: {
+                deleteGoods(id) {
+                    const index = this.goodsList.findIndex(
+                        goods => goods.id === id
+                    )
+                    if (index !== -1) {
+                        this.goodsList.splice(index, 1)
+                    }
+
+                },
+                addGoods() {
+                    if (this.goodsName.trim() === '') {
+                        alert('请重新输入')
+                        return
+                    }
+                    this.goodsList.push({
+                        id: this.nextId++,
+                        name: this.goodsName.trim()
+                    })
+                    this.goodsName = ''
+                }
+            },
+            computed: {
+                goodsCount() {
+                    return this.goodsList.length
+                },
+                filterGoods() {
+                    if (this.search.trim() === '') {
+                        return this.goodsList
+                    }
+                    return this.goodsList.filter(goods => {
+                        return goods.name.includes(this.search.trim())
+                    })
+                },
+                filterGoodsCount() {
+                    return this.filterGoods.length
+                }
+
+            }
+
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生信息提交</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="studentName">
+        <select v-model="major">
+            <option value="">请选择专业</option>
+            <option value="网络工程">网络工程</option>
+            <option value="软件工程">软件工程</option>
+            <option value="计算机科学与技术">计算机科学与技术</option>
+        </select>
+        <button @click="submit">提交</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    studentName: '',
+                    major: ''
+                }
+            },
+            methods: {
+                submit() {
+                    if (!this.studentName) {
+                        alert('请输入姓名！')
+                        return
+                    }
+                    if (!this.major) {
+                        alert('请输入专业')
+                        return
+                    }
+                    alert('提交成功！')
+                    console.log('姓名:' + this.studentName);
+                    console.log('专业:' + this.major);
+                    this.studentName = ''
+                    this.major = ''
+
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

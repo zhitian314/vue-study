@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学生信息卡片组件</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <student-card>
+            <h3 slot="title">学生档案</h3>
+            <template slot="content" slot-scope="scope">
+                <p>姓名：{{scope.student.name}}</p>
+                <p>年龄：{{scope.student.age}}</p>
+            </template>
+            <button slot="footer">查看详情</button>
+        </student-card>
+    </div>
+
+    <script>
+        Vue.component('student-card', {
+            data() {
+                return {
+                    student: {
+                        name: '小明',
+                        age: 18
+                    }
+                }
+            },
+            template: `
+            <div class="student-card">
+        <header><slot name="title"></slot></header>
+        <main><slot name="content" :student="student"></slot></main>
+        <footer><slot name="footer"></slot></footer>
+    </div>
+            `
+        })
+
+        new Vue({
+            el: '#app',
+
+        })
+    </script>
+</body>
+
+</html>

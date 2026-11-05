@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+
+<body>
+    <div class="app">
+        <h1>温馨提示</h1>
+        <my-notice>用心学习</my-notice>
+        <my-notice></my-notice>
+    </div>
+
+    <script>
+        Vue.component('my-notice', {
+            template: `
+        <div class="notice">
+        <h1>温馨提示</h1>
+        <slot>暂无提示</slot>
+    </div>
+        `
+        })
+        new Vue({
+            el: '.app',
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局过滤器</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{name | hello}}</p>
+    </div>
+    <script>
+        Vue.filter('hello', function (value) {
+            return '欢迎你' + value
+        })
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    name: '小王'
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>

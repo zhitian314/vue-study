@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../vue学习/vue.js"></script>
+</head>
+<style>
+    input {
+        width: 200px;
+        height: 30px;
+    }
+
+    #add {
+        height: 30px;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <h1>学生管理小练习</h1>
+        <input type="text" placeholder="请输入学生姓名" v-model="username">
+        <button @click="add" id="add">添加</button><br>
+        <input type="text" placeholder="请输入学生姓名" v-model="search">
+        <ul>
+            <li v-for="(student ,index) in filterstudents" :key="student.id">
+                {{index + 1}}.{{student.name}}
+                <button @click="del(student.id)">删除</button>
+            </li>
+
+        </ul>
+        <p v-if="userList.length === 0">暂无学生，请先添加</p>
+        <p v-else-if="filterstudents.length === 0">没有找到匹配学生</p>
+        <p v-else>当前学生人数：{{filterstudents.length}}
+            学生总人数：{{userList.length}}
+        </p>
+    </div>
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                username: '',
+                userList: [],
+                search: '',
+                nextId: 1
+            },
+            methods: {
+                add: function () {
+                    //检查姓名是否为空
+                    if (this.username.trim() === '') { //trim()可以去掉姓名前后的空格，防止空格输入也能添加
+                        alert('姓名为空，请重新输入')
+                        return
+                    }
+                    this.userList.push({
+                        id: this.nextId++,
+
+                        name: this.username.trim()
+                    })
+                    this.username = ''
+                },
+                // del: function (student) {
+                //     var index = this.userList.indexOf(student)
+                //     if (index != -1)
+                //         this.userList.splice(index, 1)
+                // }
+                del: function (id) {
+                    var index = this.userList.findIndex(function (student) {
+                        return student.id === id
+                    })
+                    if (index !== -1) {
+                        this.userList.splice(index, 1)
+                    }
+                }
+            },
+            computed: {
+                filterstudents: function () {
+                    if (this.search === '') {
+                        return this.userList
+                    }
+                    var keyword = this.search
+                    return this.userList.filter(function (student) {
+                        return student.name.includes(keyword)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
